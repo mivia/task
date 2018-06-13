@@ -1,0 +1,12 @@
+[
+  {
+    "title": "First issue",
+    "description": "Some description",
+    "state": "pending"
+  },
+  {
+    "title": "Second issue",
+    "description": "Some description",
+    "state": "open"
+  }
+]
