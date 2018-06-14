@@ -1,5 +1,5 @@
 import { MUTATION_TYPES } from './mutation-types';
-import { ISSUE_STATES } from 'constants';
+import { ISSUE_STATES } from '../common/constants';
 
 export default {
   [MUTATION_TYPES.SET_INITIAL_ISSUES] (state, issues) {
