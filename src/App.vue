@@ -1,25 +1,31 @@
 <template>
   <div>
     <div class="container">
-      <h2 v-if="issues.length">Schibsted test task</h2>
-      <h2 v-if="!issues.length">No issues left :(</h2>
-      <ul>
-        <li v-for="issue in issues">
-          <span>{{issue.title}}</span>
-          <span>{{issue.description}}</span>
-          <div>
-            <span v-on:click="issueStateClicked(state, issue)" v-for="state in issueStates" v-bind:class="getStateClass(state, issue)">
-              {{state}}
-            </span>
-          </div>
-          <button type="button" name="button" v-on:click="deleteIssue(issue)">
-            Delete issue
+      <div class="row">
+        <div class="col-xs-12 col-md-6 centered">
+          <h2 class="txtC" v-if="issues.length">Schibsted test task</h2>
+          <h2 class="txtC" v-if="!issues.length">No issues left :(</h2>
+          <ul>
+            <li v-for="issue in issues">
+              <h4>Title:</h4>
+              <span>{{issue.title}}</span>
+              <h4>Description: </h4>
+              <span>{{issue.description}}</span>
+              <h4>Issue state:</h4>
+              <div class="btn-group dB clearfix" id="states-group" role="group" >
+                <button type="button" class="btn btn-secondary" v-on:click="issueStateClicked(state, issue)" v-for="state in issueStates" v-bind:class="getStateClass(state, issue)">{{state}}</button>
+              </div>
+
+              <button class="btn btn-warning dB centered" type="button" name="button" v-on:click="deleteIssue(issue)">
+                Delete issue
+              </button>
+            </li>
+          </ul>
+          <button class="btn btn-danger dB centered" v-if="issues.length" type="button" name="button" v-on:click="resetIssuesStates">
+            Reset issues` states
           </button>
-        </li>
-      </ul>
-      <button v-if="issues.length" type="button" name="button" v-on:click="resetIssuesStates">
-        Reset issues` states
-      </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -68,12 +74,29 @@ export default {
 </script>
 
 <style lang="scss">
-  .container {
-    width: 50%;
-    margin: 0 auto;
+  @import './css/app.css';
+
+  #states-group {
+    margin-bottom: 20px;
+  }
+
+  .dB {
+    display: block;
+  }
+
+  .txtC {
     text-align: center;
+  }
+
+  .centered{
+    float: none;
+    margin: 0 auto;
+  }
+
+  .container {
     ul {
       list-style-type: none;
+      padding: 0;
       li {
         padding: 10px;
         margin-bottom: 10px;
