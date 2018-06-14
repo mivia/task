@@ -5,14 +5,20 @@ Simple vue.js application presenting list of issues with possibilities of:
   - deleting issues
   - reseting issues' states
 
-## Installing
+# Prerequisites
+
+Assuming you are using chrome browser - please install this extension:
+  https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd
+I have added the vuex state management in order to see the state changes more clearly and maybe do some action rollbacks when needed :)
+
+# Installing
 
 Assuming you have node and npm already installed - run 'npm i' in the project root.
 
-### Running in dev mode
+# Running in dev mode
 
 Run the application in development mode using 'npm run dev'. For production build use 'npm run build'.
 
-#### Running the tests
+# Running the tests
 
 Run the unit tests with 'npm run test'.
