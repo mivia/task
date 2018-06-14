@@ -65,5 +65,18 @@ describe('mutations tests', () => {
     };
     mutations[MUTATION_TYPES.CHANGE_ISSUE_STATE](state, payload);
     expect(state.issues[1].state).toBe(ISSUE_STATES.CLOSED);
-  })
+  });
+
+  it('should delete one issue from the stock', () => {
+    const issueToDelete = state.issues[0];
+    mutations[MUTATION_TYPES.DELETE_ISSUE](state, issueToDelete);
+    expect(state.issues.length).toBe(2);
+  });
+
+  it('should reset issues states correctly', () => {
+    mutations[MUTATION_TYPES.RESET_ISSUES_STATES](state);
+    state.issues.forEach(issue => {
+      expect(issue.state).toBe('');
+    })
+  });
 })

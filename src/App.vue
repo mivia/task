@@ -1,16 +1,25 @@
 <template>
   <div>
     <div class="container">
-      <h2>Schibsted test task</h2>
+      <h2 v-if="issues.length">Schibsted test task</h2>
+      <h2 v-if="!issues.length">No issues left :(</h2>
       <ul>
         <li v-for="issue in issues">
           <span>{{issue.title}}</span>
           <span>{{issue.description}}</span>
-          <span v-on:click="issueStateClicked(state, issue)" v-for="state in issueStates" v-bind:class="getStateClass(state, issue)">
-            {{state}}
-          </span>
+          <div>
+            <span v-on:click="issueStateClicked(state, issue)" v-for="state in issueStates" v-bind:class="getStateClass(state, issue)">
+              {{state}}
+            </span>
+          </div>
+          <button type="button" name="button" v-on:click="deleteIssue(issue)">
+            Delete issue
+          </button>
         </li>
       </ul>
+      <button v-if="issues.length" type="button" name="button" v-on:click="resetIssuesStates">
+        Reset issues` states
+      </button>
     </div>
   </div>
 </template>
@@ -27,6 +36,12 @@ export default {
     }
   },
   methods: {
+    deleteIssue: function(issue) {
+      this.$store.commit(MUTATION_TYPES.DELETE_ISSUE, issue);
+    },
+    resetIssuesStates: function () {
+      this.$store.commit(MUTATION_TYPES.RESET_ISSUES_STATES);
+    },
     issueStateClicked: function (state, issue) {
       this.$store.commit(MUTATION_TYPES.CHANGE_ISSUE_STATE, { state, issue })
     },
@@ -60,6 +75,7 @@ export default {
     ul {
       list-style-type: none;
       li {
+        padding: 10px;
         margin-bottom: 10px;
         border: 1px solid gray;
       }
