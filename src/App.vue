@@ -6,7 +6,7 @@
         <li v-for="issue in issues">
           <span>{{issue.title}}</span>
           <span>{{issue.description}}</span>
-          <span v-for="state in issueStates" v-bind:class="getStateClass(state, issue)">
+          <span v-on:click="issueStateClicked(state, issue)" v-for="state in issueStates" v-bind:class="getStateClass(state, issue)">
             {{state}}
           </span>
         </li>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-
+import { MUTATION_TYPES } from './store/mutation-types';
 import { ISSUE_STATES } from 'constants';
 
 export default {
@@ -27,6 +27,9 @@ export default {
     }
   },
   methods: {
+    issueStateClicked: function (state, issue) {
+      this.$store.commit(MUTATION_TYPES.CHANGE_ISSUE_STATE, { state, issue })
+    },
     getStateClass: (state, issue) => {
       switch(state) {
         case ISSUE_STATES.OPEN:

@@ -2,11 +2,13 @@
   {
     "title": "First issue",
     "description": "Some description",
-    "state": "PENDING"
+    "state": "PENDING",
+    "id": 1
   },
   {
     "title": "Second issue",
     "description": "Some description",
-    "state": "OPEN"
+    "state": "OPEN",
+    "id": 2
   }
 ]
