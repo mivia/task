@@ -6,8 +6,8 @@
         <li v-for="issue in issues">
           <span>{{issue.title}}</span>
           <span>{{issue.description}}</span>
-          <span class="state">
-            {{issue.state}}
+          <span v-for="state in issueStates" v-bind:class="getStateClass(state, issue)">
+            {{state}}
           </span>
         </li>
       </ul>
@@ -16,11 +16,29 @@
 </template>
 
 <script>
+
+import { ISSUE_STATES } from 'constants';
+
 export default {
   name: 'app',
-  data () {
+  data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      issueStates: ISSUE_STATES
+    }
+  },
+  methods: {
+    getStateClass: (state, issue) => {
+      switch(state) {
+        case ISSUE_STATES.OPEN:
+          return issue.state === ISSUE_STATES.OPEN ? `state-open active` : `state-open`;
+        break;
+        case ISSUE_STATES.CLOSED:
+          return issue.state === ISSUE_STATES.CLOSED ? 'state-closed active' : 'state-closed';
+        break;
+        case ISSUE_STATES.PENDING:
+          return issue.state === ISSUE_STATES.PENDING ? 'state-pending active' : 'state-pending';
+        break;
+      }
     }
   },
   computed: {
@@ -54,15 +72,38 @@ export default {
 
   .state-pending {
     @extend .state;
-    background-color: gray;
   }
 
   .state-open {
     @extend .state;
+  }
+
+  .state-closed {
+    @extend .state;
+  }
+
+  .state-pending.active {
+    background-color: gray;
+  }
+
+  .state-open.active {
+    background-color: green !important;
+  }
+
+  .state-closed.active {
+    background-color: red;
+  }
+
+  .state-pending:hover {
+    background-color: gray;
+  }
+
+  .state-open:hover {
     background-color: green;
   }
 
-  .state-closer {
-    @extend .state;
+  .state-closed:hover {
+    background-color: red;
   }
+
 </style>
