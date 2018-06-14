@@ -6,7 +6,11 @@ import mutations from './mutations';
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
-  state: { message: 'hello'},
+  state: {
+    issues: []
+  },
   mutations,
   actions
-})
+});
+
+export default store;
